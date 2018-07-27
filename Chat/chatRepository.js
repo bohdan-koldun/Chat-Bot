@@ -7,11 +7,10 @@ class ChatRepository {
       this.messages = new Proxy(messages, proxyHandler);
     else
       this.messages = messages;
-    this.users = users;
+      this.users = users;
   }
 
   addMessage(msg) {
-    console.log('msg', msg);
     if (msg.message !== '') {
       this.messages.push(msg);
     }
@@ -19,6 +18,8 @@ class ChatRepository {
       this.messages.shift();
     }
   }
+
+
 
   addUser(newUser) {
     this.users.forEach(user => {
@@ -39,7 +40,6 @@ class ChatRepository {
         return result;
       }
     }
-
   }
 
 }

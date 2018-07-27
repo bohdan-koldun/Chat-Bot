@@ -1,10 +1,10 @@
 const app = require('express')();
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
-const Message = require('./Chat/message.js');
-const User = require('./Chat/user.js');
-const ChatRepository = require('./Chat/chatRepository');
-const BotFacade = require('./Chat/botFacede');
+const Message = require('./chat/message.js');
+const User = require('./chat/user.js');
+const ChatRepository = require('./chat/chatRepository');
+const BotFacade = require('./chat/botFacade');
 const TIME_DELAY_CHANGE_STATUS = 10000; 
 const PORT = 3000;
 
@@ -67,6 +67,7 @@ io.on('connection', function (socket) {
   
   });
 
+  
   // when a user disconnects
   socket.on('disconnect', () => {
     if (connectedUser) {

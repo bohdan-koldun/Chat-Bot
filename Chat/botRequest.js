@@ -1,5 +1,7 @@
-//factory pattern class
+const CURRENCY_EXCHANGE = require('./partialFunctions');
 
+
+//factory pattern class
 class BotRequest {
 
     constructor() {
@@ -88,44 +90,34 @@ class RequestMoneyExchange {
         this.amount = amount;
         this.currencyIn = currencyIn;
         this.currencyOut = currencyOut;
-        this.dollarToHryvnia = 26.6;
-        this.euroToHryvnia = 31.3;
-        this.dollarToEuro = 1.2;
     }
 
     getResponse() {
         let outAmount = this.amount;
 
-
         if (this.currencyIn == "dollar" && this.currencyOut == "hryvnia") {
-            outAmount *= this.dollarToHryvnia;
-            outAmount = +outAmount.toFixed(2);
+            outAmount = CURRENCY_EXCHANGE.dollarToHryvnia(this.amount);
             return `💱 ${this.amount} ${this.currencyIn} = ${outAmount} ${this.currencyOut}`;
         }
         else if (this.currencyIn == "dollar" && this.currencyOut == "euro") {
-            outAmount /= this.dollarToEuro;
-            outAmount = +outAmount.toFixed(2);
+            outAmount = CURRENCY_EXCHANGE.dollarToEuro(this.amount);
             return `💱 ${this.amount} ${this.currencyIn} = ${outAmount} ${this.currencyOut}`;
         }
         else if (this.currencyIn == "euro" && this.currencyOut == "hryvnia") {
-            outAmount *= this.euroToHryvnia;
-            outAmount = +outAmount.toFixed(2);
+            outAmount = CURRENCY_EXCHANGE.euroToHryvnia(this.amount);
             return `💱 ${this.amount} ${this.currencyIn} = ${outAmount} ${this.currencyOut}`;
         }
         else if  (this.currencyIn == "euro" && this.currencyOut == "dollar") {
-            outAmount *= this.dollarToEuro;
-            outAmount = +outAmount.toFixed(2);
+            outAmount = CURRENCY_EXCHANGE.euroToDollar(this.amount);
             return `💱 ${this.amount} ${this.currencyIn} = ${outAmount} ${this.currencyOut}`;
         }
         else if (this.currencyIn == "hryvnia" && this.currencyOut == "dollar") {
-            outAmount /= this.dollarToHryvnia;
-            outAmount = +outAmount.toFixed(2);
+            outAmount = CURRENCY_EXCHANGE.hryvniaToDollar(this.amount);
             return `💱 ${this.amount} ${this.currencyIn} = ${outAmount} ${this.currencyOut}`;
         }
    
         else if (this.currencyIn == "hryvnia" && this.currencyOut == "euro") {
-            outAmount /= this.euroToHryvnia;
-            outAmount = +outAmount.toFixed(2);
+            outAmount = CURRENCY_EXCHANGE.hryvniaToEuro(this.amount);
             return `💱 ${this.amount} ${this.currencyIn} = ${outAmount} ${this.currencyOut}`;
         }
  

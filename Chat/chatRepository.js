@@ -11,6 +11,7 @@ class ChatRepository {
   }
 
   addMessage(msg) {
+    console.log('msg', msg);
     if (msg.message !== '') {
       this.messages.push(msg);
     }

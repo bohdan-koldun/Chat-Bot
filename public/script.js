@@ -133,7 +133,6 @@
 
         setTimeout(function () { spanNickname.style.display = 'none'; }, 3000);
       }
-
     }
   });
 

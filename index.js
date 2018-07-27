@@ -2,9 +2,9 @@ const app = require('express')();
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 const Message = require('./chat/message.js');
-const User = require('./chat/user.js');
-const ChatRepository = require('./chat/chatRepository');
-const BotFacade = require('./chat/botFacade');
+const User = require('./Chat/user.js');
+const ChatRepository = require('./Chat/chatRepository');
+const BotFacade = require('./Chat/botFacade');
 const TIME_DELAY_CHANGE_STATUS = 10000; 
 const PORT = 3000;
 

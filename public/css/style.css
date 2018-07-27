@@ -158,12 +158,14 @@ div {
 #messages span{
   font-size: 95%;
     color: #945100;
+    z-index: 1;
 }
 
 #messages span i{
   font-size: 90%;
   line-height: 1.5;
     color: #2b2218;
+    z-index: 1;
 }
 
 #inputMessage {

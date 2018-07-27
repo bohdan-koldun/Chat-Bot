@@ -4,8 +4,7 @@ const io = require('socket.io')(server);
 const Message = require('./Chat/message.js');
 const User = require('./Chat/user.js');
 const ChatRepository = require('./Chat/chatRepository');
-const messageSendHandler = require('./Chat/proxyHandler');
-const BotRequest = require('./Chat/botRequest');
+const BotFacade = require('./Chat/botFacede');
 const TIME_DELAY_CHANGE_STATUS = 6000;
 const PORT = 3000;
 
@@ -22,24 +21,12 @@ app.get('/public/script.js', (req, res) => {
   res.sendFile(__dirname + '/public/script.js');
 });
 
-
-//-------
-const factory = new BotRequest();
-fulltime = factory.create('weather');
-parttime = factory.create('money exchange');
-temporary = factory.create('weather');
-contractor = factory.create('weather');
-
-fulltime.getResponse();
-parttime.getResponse();
-temporary.getResponse();
-contractor.getResponse();
+const botFacade = new BotFacade();
 
 
-//--------------
+const chatRepository = new ChatRepository(botFacade.getProxy());
 
-let chatRepository = new ChatRepository(messageSendHandler);
-
+botFacade.connectToChat(io, chatRepository);
 
 // a user conection event
 io.on('connection', function (socket) {
@@ -76,8 +63,9 @@ io.on('connection', function (socket) {
 
   // a user send message event
   socket.on('chat message', (msg) => {
-    chatRepository.addMessage(msg);
     io.emit('chat message', msg);
+    chatRepository.addMessage(msg);
+  
   });
 
   // when a user disconnects

@@ -1,15 +1,42 @@
+
+const pattern = {
+    weather: /What is the weather (.*?) in (\w+)\?$/,
+    moneyExchange: /Convert (\d+) (\w+) to (\w+)$/,
+    saveNotes: /Save note title: "(.*?)" body: "(.*?)"/,
+    showNotesList: /Show note list/,
+    deleteNote: /Delete note "(.*?)"/,
+    showNote: /Show note "(.*?)"/,
+    advise: /.*?\s[\#\@\)\₴\?\$0]/,
+    quotes: /show quote/
+}
+
+
+
 class Parser {
-    constructor(message) {
-        this.message = message;
 
+    static findBot(message) {
+        let botPattern = /(^)@bot(\s|$)/;
+        if (botPattern.test(message)) {
+            return true;
+        }
+        return false;
     }
 
-    findBot() {
-        let regExp = new RegExp(`(^)@bot(\\s|$)`);
-
-        if (message.search(regExp) !== -1)
-            console.log("@bot start");
+    static defineCommand(message) {
+        for (let key in pattern) {
+            if (pattern[key].test(message))
+                return key;
+        }
+        return 'unknown';
     }
+
+    static defineArguments(message, key) {
+
+        return message.match(pattern[key]);
+    }
+
+
+
 
 }
 

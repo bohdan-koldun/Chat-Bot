@@ -1,22 +1,35 @@
 class BotRequest {
-    create(type) {
+    create(type, args) {
         let request;
-        if (type === 'weather') {
-            request = new RequestWeather()
-        } else if (type === 'money exchange') {
-            request = new RequestMoneyExchange()
-        } else if (type === 'notes') {
-            request = new RequestNotes()
-        } else if (type === 'advise') {
-            request = new RequestAdvise()
-        }
-        else if (type === 'quotes') {
-            request = new RequestQuotes()
-        }
 
-        request.type = type
-        request.getResponse = function () {
-            console.log(`${this.type}: rate ${this.rate}/hour`)
+        switch (type) {
+            case 'weather':
+            {
+                request = new RequestWeather(args[1], args[2]);
+                break;
+            }
+            case 'moneyExchange':
+            {
+                request = new RequestMoneyExchange();
+                break;
+            }
+            case 'saveNotes':
+            {
+                request = new RequestNotes();
+                break;
+            }
+            case 'advise':
+            {
+                request = new RequestAdvise();
+                break;
+            }
+            case 'quotes':
+            {
+                request = new RequestQuotes();
+                break;
+            }
+            default:
+                break;
         }
 
         return request;
@@ -25,9 +38,25 @@ class BotRequest {
 
 
 class RequestWeather {
-    constructor() {
-        this.rate = '$12'
-    }
+
+    constructor(location, date) {
+        this.location = location;
+        this.date = date;
+      }
+    
+      getResponse() {
+        const temperature = Math.round(Math.random() * 35);
+        let feeling;
+        if (temperature < 7) {
+          feeling = "cold";
+        } else if (temperature > 24) {
+          feeling = "hot";
+        } else {
+          feeling = "comfort";
+        }
+        return `The weather is ${feeling} in ${this.location} ${this.date}, temperature ${temperature} C`;
+      }
+    
 }
 
 class RequestMoneyExchange {

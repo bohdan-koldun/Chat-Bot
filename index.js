@@ -5,7 +5,7 @@ const Message = require('./Chat/message.js');
 const User = require('./Chat/user.js');
 const ChatRepository = require('./Chat/chatRepository');
 const BotFacade = require('./Chat/botFacede');
-const TIME_DELAY_CHANGE_STATUS = 6000;
+const TIME_DELAY_CHANGE_STATUS = 10000; 
 const PORT = 3000;
 
 // Routing
@@ -43,7 +43,6 @@ io.on('connection', function (socket) {
 
     setTimeout(() => {
       let result = chatRepository.changeStatusUser('online', connectedUser);
-      console.log(result )
       io.emit(result, connectedUser);
     },
       TIME_DELAY_CHANGE_STATUS);

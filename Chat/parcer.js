@@ -2,10 +2,10 @@
 const pattern = {
     weather: /What is the weather (.*?) in (\w+)\?$/,
     moneyExchange: /Convert (\d+) (\w+) to (\w+)$/,
-    saveNotes: /Save note title: "(.*?)" body: "(.*?)"/,
+    saveNote: /Save note title: (.*) body: (.*)/,
     showNotesList: /Show note list/,
-    deleteNote: /Delete note "(.*?)"/,
-    showNote: /Show note "(.*?)"/,
+    deleteNote: /Delete note (.*)/,
+    showNote: /Show note (.*)/,
     advise: /.*?\s[\#\@\)\₴\?\$0]/,
     quotes: /show quote/
 }
@@ -31,12 +31,8 @@ class Parser {
     }
 
     static defineArguments(message, key) {
-
         return message.match(pattern[key]);
     }
-
-
-
 
 }
 

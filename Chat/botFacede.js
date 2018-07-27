@@ -17,10 +17,10 @@ class BotFacade {
 
                 if (property !== 'length') {
                     this.filterMessages(value.message,  target);
-                    console.debug(target, target);
-                    console.debug('----------------------');
-                    console.debug(this.message == target);
-                    console.debug('----------------------');
+                    //console.debug(target, target);
+                   // console.debug('----------------------');
+                   // console.debug(this.message == target);
+                   // console.debug('----------------------');
                 }
 
 
@@ -38,11 +38,17 @@ class BotFacade {
         if (Parser.findBot(message)) {
             const command = Parser.defineCommand(message);
             //  console.log(command);
-            const args = Parser.defineArguments(message, command);
-            //console.log(args);
-            let commandRequest = this.request.create(command, args);
-            const responseMsg = commandRequest.getResponse();
 
+            let responseMsg;
+            if(command && command !== 'unknown') {
+            const args = Parser.defineArguments(message, command);
+           // console.log(args);
+            const commandRequest = this.request.create(command, args);
+            responseMsg = commandRequest.getResponse();
+        }
+        else{
+            responseMsg = `I am smart <b>Bot</b>! But I don't understand the command! 😥 `;
+        }
 
           //  const that = this;
             // setTimeout(that.sendMessage, 500, responseMsg);
@@ -53,7 +59,7 @@ class BotFacade {
     }
 
     sendMessage(responseMsg) {
-        console.log(this.chatRepository);
+       // console.log(this.chatRepository);
         if (this.io && this.chatRepository && responseMsg) {
             const msg = new Message('Mr. Bot', 'bot', responseMsg);
             this.io.emit('chat message', msg);

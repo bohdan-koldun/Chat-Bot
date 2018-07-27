@@ -31,12 +31,14 @@ class ChatRepository {
   }
 
   changeStatusUser(status, user) {
-    this.users.forEach(item => {
-      if (item.nickname === user.nickname) {
-        const result = item.changeStatus(status);
+
+    for (let i = 0; i < this.users.length; i++) {
+      if (this.users[i].nickname === user.nickname) {
+        const result = user.changeStatus(status);
         return result;
       }
-    });
+    }
+
   }
 
 }

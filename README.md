@@ -1,4 +1,4 @@
 # Домашка: Chat Bot
 
-# Ще не готова до перевірки. Постараюсь за 27.07.18 залити всі павки
+![alt text](https://github.com/bohdan-koldun/Chat-Bot/blob/master/screenshots/1.jpg "View")
 
